@@ -2,6 +2,15 @@
 
 (require scheme/foreign) (unsafe!)
 
+(provide (except-out (all-defined-out)
+                     libmpiglue
+                     libmpi
+                     init-impl
+                     comm-size-impl
+                     comm-rank-impl))
+
+(define libmpiglue (ffi-lib "libmpiglue"))
+
 (define libmpi (ffi-lib "libmpi"))
 
 (define-struct result (value status))
@@ -9,7 +18,10 @@
 ; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Init.html
 ; int MPI_Init(int *argc, char ***argv)
 
-(define mpi-init
+(define (init #:args [args '()])
+  (init-impl args))
+
+(define init-impl
   (get-ffi-obj
    "MPI_Init" libmpi
    (_fun (args)
@@ -22,10 +34,14 @@
 ; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Comm_size.html
 ; int MPI_Comm_size ( MPI_Comm comm, int *size )
 
-(define mpi_comm_world
+(define COMM/WORLD
   (get-ffi-obj
    "ompi_mpi_comm_world" libmpi _fpointer))
-(define mpi-comm-size
+
+(define (comm-size #:comm [comm COMM/WORLD])
+  (comm-size-impl comm))
+
+(define comm-size-impl
   (get-ffi-obj
    "MPI_Comm_size" libmpi
    (_fun (comm)
@@ -40,7 +56,10 @@
 ; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Comm_rank.html
 ; int MPI_Comm_rank ( MPI_Comm comm, int *rank )
 
-(define mpi-comm-rank
+(define (comm-rank #:comm [comm COMM/WORLD])
+  (comm-rank-impl comm))
+
+(define comm-rank-impl
   (get-ffi-obj
    "MPI_Comm_rank" libmpi
    (_fun (comm)
@@ -52,31 +71,17 @@
          ->
          (make-result rank status))))
 
+; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Get_processor_name.html
+
+(define get-processor-name
+  (get-ffi-obj
+   "glue_Get_processor_name" libmpiglue
+   (_fun -> _string)))
+
 ; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Finalize.html
 ; int MPI_Finalize()
 
-(define mpi-finalize
+(define finalize
   (get-ffi-obj
    "MPI_Finalize" libmpi
    (_fun -> _int)))
-
-(let ([init-args '()])
-  (printf "Calling mpi-init with args: ~a~n" init-args)
-  (let ([status (mpi-init init-args)])
-  (printf "Called mpi-init: status was '~a'~n" status)))
-
-(printf "Calling mpi-comm-size~n")
-(let* ([result (mpi-comm-size mpi_comm_world)]
-       [size (result-value result)]
-       [status (result-status result)])
-  (printf "Called mpi-comm-size: size was '~a' and status was '~a'~n" size status))
-
-(printf "Calling mpi-comm-rank~n")
-(let* ([result (mpi-comm-rank mpi_comm_world)]
-       [rank (result-value result)]
-       [status (result-status result)])
-  (printf "Called mpi-comm-rank: rank was '~a' and status was '~a'~n" rank status))
-
-(printf "Calling mpi-finalize~n")
-(let ([status (mpi-finalize)])
-  (printf "Called mpi-finalize: status was '~a'~n" status))
