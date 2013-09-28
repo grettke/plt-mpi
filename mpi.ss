@@ -89,12 +89,24 @@
 (define sendInts
   (get-ffi-obj
    "sendInts" libmpiglue
-   (_fun _int _int _pointer -> _int)))
+   (_fun (dest tag comm)
+	::
+	[dest : _int] 
+	[tag : _int] 
+	[comm : _pointer]
+	 -> 
+	_int)))
 
 (define recvInts
   (get-ffi-obj
    "recvInts" libmpiglue
-   (_fun _int _int _pointer -> _int)))
+   (_fun (source tag comm)
+	::
+	[source : _int] 
+	[tag : _int] 
+	[comm : _pointer] 
+	-> 
+	_int)))
 
 ; (define sendInts
 ;   (get-ffi-obj
