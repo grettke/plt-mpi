@@ -1,15 +1,14 @@
-MPIHOME = /opt/mpich2/gnu
-CC      = $(MPIHOME)/bin/mpicc
-CLINKER = $(MPIHOME)/bin/mpicc
-CFLAGS 	= -std=c99 -Wall -pedantic
+CC	= /opt/openmpi/bin/mpicc
+CLINKER = /opt/openmpi/bin/mpicc
+CFLAGS 	= -Wall
 
-default: hwc
+default: hello_world
 
-hwc: hwc.o
-	$(CLINKER) -o hwc hwc.o
+hello_world: hello_world.o
+	$(CLINKER) -o hello_world hello_world.o
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f *.o *.log hwc
+	rm -f *.o hello_world

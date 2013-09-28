@@ -1,4 +1,4 @@
-// Source: hpc-usage1.pdf from MSCS6060 class
+// Source: hpc-usage1.pdf from class
 
 #include <stdio.h>
 #include "mpi.h"
@@ -14,7 +14,8 @@ int main(int argc, char* argv[])
 	MPI_Get_processor_name(processor_name, &namelen);
 
 	printf("Process %d on %s out of %d\n", rank, processor_name, numprocs);
-
+	printf("MPI_COMM_WORLD value is: %d\n", MPI_COMM_WORLD);
+	printf("MPI_COMM_WORLD size is: %d\n", sizeof(MPI_COMM_WORLD));
 	MPI_Finalize();
 
 	return 0;
