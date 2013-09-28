@@ -31,25 +31,6 @@ int sendInts(int len, int* vals, int dest, int tag, MPI_Comm comm)
   return result;
 }
 
-/*
-http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Recv.html
-
-int MPI_Recv( void *buf, int count, MPI_Datatype datatype, int source,
-              int tag, MPI_Comm comm, MPI_Status *status )
-
-Output Parameters
-    buf 	initial address of receive buffer (choice)
-	status 	status object (Status)
-
-
-Input Parameters
-    count 	 maximum number of elements in receive buffer (integer)
-	datatype datatype of each receive buffer element (handle)
-	source 	 rank of source (integer)
-	tag 	 message tag (integer)
-	comm 	 communicator (handle)
- */
-
 int recvInts(int source, int tag, MPI_Comm comm)
 {
   printf("cdbg: entered recvInts");
