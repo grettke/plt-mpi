@@ -42,18 +42,6 @@ int sendInts(int dest, int tag, MPI_Comm comm)
   return result;
 }
 
-/* int sendInts(int len, int* vals, int dest) */
-/* { */
-/*   printf("cdbg: in sendInts -> %d\n", dest); */
-/*   return */
-/*   MPI_Send(vals, */
-/*            len, */
-/*            MPI_INT, */
-/*            dest, */
-/*            0, */
-/*            MPI_COMM_WORLD); */
-/* } */
-
 /*
 http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Recv.html
 
@@ -86,18 +74,3 @@ int recvInts(int source, int tag, MPI_Comm comm)
     }
   return result;
 }
-
-/* int* recvInts(int src, int len) */
-/* { */
-/*   printf("cdbg: in recvInts %d <-\n", src); */
-/*   int* result = (int*) malloc(sizeof(int) * len); */
-/*   MPI_Status status; */
-/*   MPI_Recv(&result, */
-/*            len, */
-/*            MPI_INT, */
-/*            src, */
-/*            0, */
-/*            MPI_COMM_WORLD, */
-/*            &status); */
-/*   return result; */
-/* } */
