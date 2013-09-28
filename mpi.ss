@@ -89,8 +89,10 @@
 (define sendInts
   (get-ffi-obj
    "sendInts" libmpiglue
-   (_fun (dest tag comm)
+   (_fun (args dest tag comm)
 	::
+	[len : _int = (length args)]
+	[args : (_list io _int len)]
 	[dest : _int] 
 	[tag : _int] 
 	[comm : _pointer]
