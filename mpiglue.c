@@ -10,21 +10,6 @@ char* glue_Get_processor_name(void)
   return processor_name;
 }
 
-/*
-; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Send.html
-;
-; int MPI_Send( void *buf, int count, MPI_Datatype datatype, int dest,
-;               int tag, MPI_Comm comm )
-;
-; Input Parameters
-;   buf 	 initial address of send buffer (choice)
-;	count 	 number of elements in send buffer (nonnegative integer)
-;	datatype datatype of each send buffer element (handle)
-;	dest 	 rank of destination (integer)
-;	tag 	 message tag (integer)
-;	comm 	 communicator (handle)
-*/
-
 int sendInts(int len, int* vals, int dest, int tag, MPI_Comm comm)
 {
 /*   printf("cdbg: entered sendInts\n"); */
