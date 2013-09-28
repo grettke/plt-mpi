@@ -19,7 +19,7 @@
         (printf "[~a]Send status: ~a~n" rank status)))
 
 (when (= rank 1)
-      (let ((status (mpi:recvInts 0 0 mpi:COMM/WORLD)))
-        (printf "[~a]Receive status: ~a~n" rank status)))
+      (let ((data (mpi:recvInts 0 0 mpi:COMM/WORLD)))
+        (printf "[~a]Received data: ~a~n" rank data)))
 
 (define finalized? (mpi:finalize))
