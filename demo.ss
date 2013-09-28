@@ -17,12 +17,9 @@
 (printf "Process ~a on ~a out of ~a~n" rank processor_name numprocs)
 
 (when (= rank 0) 
-	(printf "sdbg: calling sendInts~n")
-	(mpi:printSimpleInts '(6 7 8 9 10))
-	(mpi:sendInts '(5 4 3 2 99) 1 0 mpi:COMM/WORLD))
+	(mpi:sendInts '(5 4 3 2 1) 1 0 mpi:COMM/WORLD))
 
 (when (= rank 1) 
-	(printf "sdbg: calling recvInts~n")
 	(mpi:recvInts 0 0 mpi:COMM/WORLD))
 
 (define finalized? (mpi:finalize))

@@ -27,22 +27,22 @@ char* glue_Get_processor_name(void)
 
 int sendInts(int len, int* vals, int dest, int tag, MPI_Comm comm)
 {
-  printf("cdbg: entered sendInts\n");
-  for(int i = 0; i < len; i++)
-    {
-      printf("sendInts value: %d\n", vals[i]);
-    }
+/*   printf("cdbg: entered sendInts\n"); */
+/*   for(int i = 0; i < len; i++) */
+/*     { */
+/*       printf("sendInts value: %d\n", vals[i]); */
+/*     } */
 
-  int buffer[5];
+/*   int buffer[5]; */
 
-  buffer[0] = 1;
-  buffer[1] = -1;
-  buffer[2] = 5;
-  buffer[3] = -61;
-  buffer[4] = 1385;
-  printf("cdgb: sending message\n");
+/*   buffer[0] = 1; */
+/*   buffer[1] = -1; */
+/*   buffer[2] = 5; */
+/*   buffer[3] = -61; */
+/*   buffer[4] = 1385; */
+/*   printf("cdgb: sending message\n"); */
   int result = MPI_Send(vals, len, MPI_INT, dest, tag, comm);
-  printf("cdbg: sent message\n");
+/*   printf("cdbg: sent message\n"); */
   return result;
 }
 
