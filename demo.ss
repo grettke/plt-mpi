@@ -22,6 +22,6 @@
 
 (when (= rank 1) 
 	(printf "sdbg: calling recvInts~n")
-	(mpi:recvInts 0 0))
+	(mpi:recvInts 0 0 mpi:COMM/WORLD))
 
 (define finalized? (mpi:finalize))

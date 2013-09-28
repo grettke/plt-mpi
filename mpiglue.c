@@ -73,12 +73,12 @@ Input Parameters
 	comm 	 communicator (handle)
  */
 
-int recvInts(int source, int tag)
+int recvInts(int source, int tag, MPI_Comm comm)
 {
   printf("cdbg: entered recvInts");
   int buffer[5];
   MPI_Status status;
-  int result = MPI_Recv(buffer, 5, MPI_INT, source, tag, MPI_COMM_WORLD, &status);
+  int result = MPI_Recv(buffer, 5, MPI_INT, source, tag, comm, &status);
   printf("cdbg: received message\n");
   for(int i = 0; i < 5; i++)
     {
