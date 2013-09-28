@@ -5,7 +5,7 @@
 #$ -cwd
 #$ -N scheme_mpi_demo
 #$ -j y
-#$ -o demo.$JOB_ID.log
+#$ -o log.schemedemo.$JOB_ID
 
 export PATH=/home/grettke//bin/plt-4.2.5/bin:/opt/openmpi/bin:$PATH
 MPIRUN="/opt/openmpi/bin/mpirun -np $NSLOTS"
