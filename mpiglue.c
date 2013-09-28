@@ -44,11 +44,3 @@ int recvInts(int source, int tag, MPI_Comm comm)
     }
   return result;
 }
-
-void printSimpleInts(int len, int* vals)
-{
-  for(int i = 0; i < len; i++)
-    {
-      printf("printSimpleInts: %d\n", vals[i]);
-    }
-}
