@@ -26,7 +26,7 @@ char* glue_Get_processor_name(void)
 */
 int sendInts(int len, int* vals, int dest)
 {
-  printf("cdbg: in sendInts\n");
+  printf("cdbg: in sendInts -> %d\n", dest);
   return
   MPI_Send(vals,
            len,
@@ -56,7 +56,7 @@ Input Parameters
  */
 int* recvInts(int src, int len)
 {
-  printf("cdbg: in recvInts\n");
+  printf("cdbg: in recvInts %d <-\n", src);
   int* result = (int*) malloc(sizeof(int) * len);
   MPI_Status status;
   MPI_Recv(&result,
