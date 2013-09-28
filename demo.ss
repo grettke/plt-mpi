@@ -18,7 +18,7 @@
 
 (when (= rank 0) 
 	(printf "sdbg: calling sendInts~n")
-	(mpi:sendInts 1 0))
+	(mpi:sendInts 1 0 mpi:COMM/WORLD))
 
 (when (= rank 1) 
 	(printf "sdbg: calling recvInts~n")

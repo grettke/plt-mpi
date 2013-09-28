@@ -89,7 +89,7 @@
 (define sendInts
   (get-ffi-obj
    "sendInts" libmpiglue
-   (_fun _int _int -> _int)))
+   (_fun _int _int _pointer -> _int)))
 
 (define recvInts
   (get-ffi-obj
