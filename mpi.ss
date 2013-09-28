@@ -107,24 +107,3 @@
 	[comm : _pointer] 
 	-> 
 	_int)))
-
-; (define sendInts
-;   (get-ffi-obj
-;    "sendInts" libmpiglue
-;    (_fun (buf dest)
-;          ::
-;          [len : _int = (length buf)]
-;          [buf : (_list io _int len)]
-;          [dest : _int]
-;          ->
-;          _int)))
-
-; (define recvInts
-;   (get-ffi-obj
-;    "recvInts" libmpiglue
-;    (_fun (src len)
-;          ::
-;          [src : _int]
-;          [len : _int]
-;          ->
-;          (_list o _int len))))
