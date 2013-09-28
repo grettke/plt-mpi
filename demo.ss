@@ -16,15 +16,12 @@
 
 (printf "Process ~a on ~a out of ~a~n" rank processor_name numprocs)
 
-(printf "sdbg: calling sendInts~n")
-(when (= rank 0)
-      (mpi:sendInts
-       (make-list msg-count 42)
-       1))
+(when (= rank 0) 
+	(printf "sdbg: calling sendInts~n")
+	(mpi:sendInts))
 
-(printf "sdbg: calling recvInts~n")
-(when (= rank 1)
-      (let ([the-msg (mpi:recvInts 0 msg-count)])
-        (printf "I (rank ~a) received the message: ~a~n" the-msg)))
+(when (= rank 1) 
+	(printf "sdbg: calling recvInts~n")
+	(mpi:recvInts))
 
 (define finalized? (mpi:finalize))

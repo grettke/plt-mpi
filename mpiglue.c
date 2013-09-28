@@ -24,17 +24,35 @@ char* glue_Get_processor_name(void)
 ;	tag 	 message tag (integer)
 ;	comm 	 communicator (handle)
 */
-int sendInts(int len, int* vals, int dest)
+
+int sendInts(void)
 {
-  printf("cdbg: in sendInts -> %d\n", dest);
-  return
-  MPI_Send(vals,
-           len,
-           MPI_INT,
-           dest,
-           0,
-           MPI_COMM_WORLD);
+  printf("cdbg: entered sendInts");
+
+  int buffer[5];
+
+  buffer[0] = 1;
+  buffer[1] = -1;
+  buffer[2] = 5;
+  buffer[3] = -61;
+  buffer[4] = 1385;
+  printf("cdgb: sending message\n");
+  int result = MPI_Send(buffer, 5, MPI_INT, 1, 0, MPI_COMM_WORLD);
+  printf("cdbg: sent message\n");
+  return result;
 }
+
+/* int sendInts(int len, int* vals, int dest) */
+/* { */
+/*   printf("cdbg: in sendInts -> %d\n", dest); */
+/*   return */
+/*   MPI_Send(vals, */
+/*            len, */
+/*            MPI_INT, */
+/*            dest, */
+/*            0, */
+/*            MPI_COMM_WORLD); */
+/* } */
 
 /*
 http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Recv.html
@@ -54,17 +72,32 @@ Input Parameters
 	tag 	 message tag (integer)
 	comm 	 communicator (handle)
  */
-int* recvInts(int src, int len)
+
+int recvInts(void)
 {
-  printf("cdbg: in recvInts %d <-\n", src);
-  int* result = (int*) malloc(sizeof(int) * len);
+  printf("cdbg: entered recvInts");
+  int buffer[5];
   MPI_Status status;
-  MPI_Recv(&result,
-           len,
-           MPI_INT,
-           src,
-           0,
-           MPI_COMM_WORLD,
-           &status);
+  int result = MPI_Recv(buffer, 5, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+  printf("cdbg: received message\n");
+  for(int i = 0; i < 5; i++)
+    {
+      printf("%d\n", buffer[i]);
+    }
   return result;
 }
+
+/* int* recvInts(int src, int len) */
+/* { */
+/*   printf("cdbg: in recvInts %d <-\n", src); */
+/*   int* result = (int*) malloc(sizeof(int) * len); */
+/*   MPI_Status status; */
+/*   MPI_Recv(&result, */
+/*            len, */
+/*            MPI_INT, */
+/*            src, */
+/*            0, */
+/*            MPI_COMM_WORLD, */
+/*            &status); */
+/*   return result; */
+/* } */
