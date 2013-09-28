@@ -25,7 +25,7 @@ char* glue_Get_processor_name(void)
 ;	comm 	 communicator (handle)
 */
 
-int sendInts(void)
+int sendInts(int dest, int tag)
 {
   printf("cdbg: entered sendInts");
 
@@ -37,7 +37,7 @@ int sendInts(void)
   buffer[3] = -61;
   buffer[4] = 1385;
   printf("cdgb: sending message\n");
-  int result = MPI_Send(buffer, 5, MPI_INT, 1, 0, MPI_COMM_WORLD);
+  int result = MPI_Send(buffer, 5, MPI_INT, dest, tag, MPI_COMM_WORLD);
   printf("cdbg: sent message\n");
   return result;
 }
