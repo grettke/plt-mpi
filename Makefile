@@ -14,3 +14,4 @@ mpiglue.o:
 clean:
 	rm mpiglue.o
 	rm libmpiglue.so
+	rm log*
