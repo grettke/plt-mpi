@@ -31,12 +31,12 @@
          ->
          _int)))
 
-; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Comm_size.html
-; int MPI_Comm_size ( MPI_Comm comm, int *size )
-
 (define COMM/WORLD
   (get-ffi-obj
    "ompi_mpi_comm_world" libmpi _fpointer))
+
+; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Comm_size.html
+; int MPI_Comm_size ( MPI_Comm comm, int *size )
 
 (define (comm-size #:comm [comm COMM/WORLD])
   (comm-size-impl comm))
