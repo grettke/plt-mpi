@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #$ -S /bin/bash
-#$ -pe orte 8
+#$ -pe orte 2
 #$ -cwd
 #$ -N foobar_hello_world
 #$ -j y
