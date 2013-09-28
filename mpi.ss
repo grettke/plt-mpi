@@ -107,3 +107,12 @@
 	[comm : _pointer] 
 	-> 
 	_int)))
+
+(define printSimpleInts
+  (get-ffi-obj "printSimpleInts" libmpiglue
+               (_fun (args)
+                     ::
+                     [len : _int = (length args)]
+                     [args : (_list io _int len)]
+                     ->
+                     _void)))
