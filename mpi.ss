@@ -109,8 +109,3 @@
 	[comm : _pointer]
 	->
 	(_list o _int 5))))
-
-(define getSimpleInts
-  (get-ffi-obj
-   "getSimpleInts" libmpiglue
-   (_fun -> (_list o _int 5))))

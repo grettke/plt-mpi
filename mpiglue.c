@@ -25,14 +25,3 @@ int* mpiglue_Recv_ints(int source, int tag, MPI_Comm comm)
        	int* result = buffer; 
 	return result;
 }
-
-int* getSimpleInts(void)
-{
-	int* result = (int*) malloc(sizeof(int)*5);
-	result[0] = 1;
-	result[1] = 2;
-	result[2] = 3;
-	result[3] = 4;
-	result[4] = 5;
-	return result;
-}
