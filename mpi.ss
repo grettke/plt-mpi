@@ -75,7 +75,7 @@
 
 (define get-processor-name
   (get-ffi-obj
-   "glue_Get_processor_name" libmpiglue
+   "mpiglue_Get_processor_name" libmpiglue
    (_fun -> _string)))
 
 ; http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Finalize.html
@@ -88,24 +88,29 @@
 
 (define sendInts
   (get-ffi-obj
-   "sendInts" libmpiglue
+   "mpiglue_Send_ints" libmpiglue
    (_fun (args dest tag comm)
 	::
 	[len : _int = (length args)]
 	[args : (_list io _int len)]
-	[dest : _int] 
-	[tag : _int] 
+	[dest : _int]
+	[tag : _int]
 	[comm : _pointer]
-	 -> 
+	 ->
 	_int)))
 
 (define recvInts
   (get-ffi-obj
-   "recvInts" libmpiglue
+   "mpiglue_Recv_ints" libmpiglue
    (_fun (source tag comm)
 	::
-	[source : _int] 
-	[tag : _int] 
-	[comm : _pointer] 
-	-> 
-	_int)))
+	[source : _int]
+	[tag : _int]
+	[comm : _pointer]
+	->
+	(_list o _int 5))))
+
+(define getSimpleInts
+  (get-ffi-obj
+   "getSimpleInts" libmpiglue
+   (_fun -> (_list o _int 5))))
