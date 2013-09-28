@@ -5,7 +5,7 @@
  
 int main(int argc, char *argv[])
 {
-    int rank, size, i;
+    int rank, size, i, sendstatus;
     int buffer[5];
     MPI_Status status;
  
@@ -16,17 +16,19 @@ int main(int argc, char *argv[])
     if (rank == 0)
     {
         for (i=0; i<5; i++)
-            buffer[i] = i;
-        MPI_Send(buffer, 5, MPI_INT, 1, 0, MPI_COMM_WORLD);
-	printf("[%d]Send buffer\n", rank);
+            buffer[i] = i+1;
+        sendstatus = MPI_Send(buffer, 5, MPI_INT, 1, 0, MPI_COMM_WORLD);
+	printf("[%d]Send status: %d\n", rank, sendstatus);
     }
     
     if (rank == 1)
     {
-        for (i=0; i<5; i++)
-            buffer[i] = -1;
         MPI_Recv(buffer, 5, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
-	printf("[%d]Received buffer\n", rank);
+	printf("[%d]Received data: ", rank);
+        for (i=0; i<5; i++) {
+            printf("%d ", buffer[i]);
+	}
+	printf("\n");
     }
     MPI_Finalize();
     return 0;
