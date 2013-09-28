@@ -3,13 +3,13 @@
 #$ -S /bin/bash
 #$ -pe orte 2
 #$ -cwd
-#$ -N scheme_mpi_demo
+#$ -N scheme_sendreceive_mpi_demo
 #$ -j y
-#$ -o log.schemedemo.$JOB_ID
+#$ -o log.sendreceiveschemedemo.$JOB_ID
 
 export PATH=/home/grettke//bin/plt-4.2.5/bin:/opt/openmpi/bin:$PATH
 MPIRUN="/opt/openmpi/bin/mpirun -np $NSLOTS"
-$MPIRUN mzscheme ./demo.ss
+$MPIRUN mzscheme ./send-receive.ss
 
 # -S Specifies  the interpreting shell for the job.
 # -pe orte 8 Start  parallel programming environment (PE),
